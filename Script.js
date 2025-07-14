@@ -312,7 +312,7 @@ function mostrarCarrito() {
     btnPagar.onclick = () => {
     const items = carrito.recorrer(); // obtener los álbumes
     localStorage.setItem("carrito", JSON.stringify(items)); // guardar en localStorage
-    window.location.href = 'pago.html';
+    window.location.href = 'Pago.html';
   };
 
     const contenedor = document.createElement('div');
