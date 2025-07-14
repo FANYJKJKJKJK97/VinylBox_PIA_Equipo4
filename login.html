@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Sistema de Usuarios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fdfaf6;
+    }
+    .login-layout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      background: linear-gradient(to right, #f4c95d, #a47148);
+    }
+    .login-container {
+      background-color: #fff0cc;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+    h1, h4 {
+      text-align: center;
+      color: #4b2c20;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      font-size: 16px;
+    }
+    .btn {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .btn-primary {
+      background-color: #a47148;
+      color: white;
+    }
+    .btn-primary:hover {
+      background-color: #f4c95d;
+      color: #000;
+    }
+    .btn-success {
+      background-color: #4b2c20;
+      color: white;
+    }
+    .btn-success:hover {
+      background-color: #f4c95d;
+      color: #000;
+    }
+    .toolbar {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .toolbar a {
+      color: #4b2c20;
+      font-weight: bold;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .widget-box {
+      display: none;
+    }
+    .widget-box.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body class="login-layout">
+  <div class="login-container">
+    <div class="center">
+      <h1>Ingreso de Usuarios</h1>
+      <h4>&copy; VinylBox </h4>
+    </div>
+
+    <div class="widget-box visible" id="login-box">
+      <form id="login-form">
+        <input type="text" name="loginUser" placeholder="Usuario" required />
+        <input type="password" name="loginPass" placeholder="Contraseña" required />
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+      </form>
+      <div class="toolbar">
+        <a data-target="#register-box">Nuevo Registro</a>
+      </div>
+    </div>
+
+    <div class="widget-box" id="register-box">
+      <form id="register-form">
+        <input type="text" name="registerUser" placeholder="Nuevo Usuario" required />
+        <input type="password" name="registerPass" placeholder="Contraseña" required />
+        <button type="submit" class="btn btn-success">Registrar</button>
+      </form>
+      <div class="toolbar">
+        <a data-target="#login-box">Regresar al Login</a>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // 1. Cargar usuarios desde localStorage o iniciar con array vacío
+  let users = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+  // Cambiar entre login y registro
+  document.querySelectorAll('.toolbar a').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = link.getAttribute('data-target');
+      document.querySelectorAll('.widget-box').forEach(box => box.classList.remove('visible'));
+      document.querySelector(target).classList.add('visible');
+    });
+  });
+
+  // Registro
+  document.getElementById('register-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = this.registerUser.value.trim();
+    const pass = this.registerPass.value;
+
+    if (users.find(u => u.user === user)) {
+      alert("El usuario ya existe.");
+      return;
+    }
+
+    users.push({ user, pass });
+    localStorage.setItem('usuarios', JSON.stringify(users)); // Guardar en localStorage
+    alert("Registro exitoso.");
+    this.reset();
+    document.querySelector('#login-box').classList.add('visible');
+    document.querySelector('#register-box').classList.remove('visible');
+  });
+
+  // Login
+  document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = this.loginUser.value.trim();
+    const pass = this.loginPass.value;
+
+    const usuarioEncontrado = users.find(u => u.user === user);
+    if (!usuarioEncontrado) {
+      alert("Usuario no existe, por favor regístrate.");
+    } else if (usuarioEncontrado.pass !== pass) {
+      alert("Contraseña incorrecta.");
+    } else {
+      alert("¡Login exitoso!");
+      localStorage.setItem('usuarioLogueado', 'true');
+      localStorage.setItem('nombreUsuario', user);
+      window.location.href = 'pago.html';
+    }
+    
+  });
+</script>
+
+
+</body>
+</html>

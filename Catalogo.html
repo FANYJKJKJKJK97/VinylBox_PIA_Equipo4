@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VinylBox - La mejor tienda online para melómanos y coleccionistas de vinilos">
+  <meta name="keywords" content="vinilos, música, discos, rock, jazz, funk, coleccionables">
+  <meta name="author" content="Tu Nombre">
+  <title>VinylBox</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #f4e0b9;
+      font-family: 'Georgia', serif;
+      letter-spacing: 3px;
+    }
+
+    h2 {
+      font-style: italic;
+      color: #fff0cc;
+      font-weight: normal;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .navbar {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      background: #4b2c20;
+      overflow: auto;
+    }
+
+    .navbar li {
+      float: left;
+    }
+
+    .navbar li a {
+      font-weight: bold;
+      font-size: large;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px 20px;
+      display: block;
+    }
+
+    .navbar li a:hover,.navbar li a.current {
+      background-color: #f2cd16;
+      color: #000;
+    }
+
+
+    .container {
+      margin: 20px;
+    }
+
+    .button-group {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    button {
+      background-color: #a47148;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    button:hover {
+      background-color: #f4c95d;
+      color: #000;
+    }
+
+    #resultado {
+      border: 2px solid #f4c95d;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #1a1a1a;
+      margin: 20px auto;
+      width: 90%;
+      min-height: 200px;
+    }
+
+    footer {
+      background-color: #2c1e14;
+      padding: 10px;
+      text-align: center;
+      color: #fff0cc;
+      font-size: 0.9em;
+      margin-top: 40px;
+    }
+
+    /* ESTILO DE TARJETAS PARA LOS ÁLBUMES */
+    
+    .album-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.album {
+  background-color: #f8f8f8;
+  color: #000;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  width: 200px;
+  text-align: center;
+}
+
+.album-img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+ul.navbar {
+  display: flex;
+  align-items: center;
+}
+
+ul.navbar li.carrito {
+  margin-left: auto;
+  margin-right: 15px;
+}
+  </style>
+</head>
+<body>
+
+  <center>
+    <h1>VinylBox</h1>
+  </center>
+
+  <ul class="navbar">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a class="current" href="Catalogo.html">Catálogo</a></li>
+    <li class="carrito"><a href="#" onclick="mostrarCarrito()">Ver Carrito 🛒</a></li>
+    <div id="estado-sesion" style="text-align: right; padding: 10px;"></div>
+
+  
+  </ul>
+
+
+  <div class="container">
+    <h2>Donde la música cobra vida en vinil</h2>
+
+    <div class="button-group">
+      <button onclick="mostrarStock()">Mostrar Stock</button>
+      <button onclick="buscarPorArtista()">Buscar por Artista</button>
+      <button onclick="buscarPorGenero()">Buscar por Género</button>
+      <button onclick="verHistorialBusquedas()">Historial de Busquedas 🕒</button>
+    </div>
+
+    <div id="resultado">
+      <!-- Aquí aparecerán los resultados desde JS -->
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 VinylBox. Todos los derechos reservados. Diseñado con pasión por la música.</p>
+  </footer>
+
+  <script src="Script.js"></script>
+</body>
+</html>
+
+
+
